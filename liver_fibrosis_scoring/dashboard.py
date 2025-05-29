@@ -14,6 +14,8 @@ import random
 
 st.set_page_config(page_title="Liver Fibrosis Dashboard")
 
+script_dir = os.path.dirname(__file__)
+
 # Sidebar menu
 section = st.sidebar.radio("Navigation", [
     "Project Overview",
@@ -28,7 +30,7 @@ section = st.sidebar.radio("Navigation", [
 
 def load_training_stats():
     try:
-        return pd.read_json("training_stats.json")
+        return pd.read_json(os.path.join(script_dir, "training_stats.json"))
     except:
         return None
 
@@ -36,7 +38,7 @@ def load_training_stats():
 
 def load_eval_report():
     try:
-        with open("eval_report.json") as f:
+        with open(os.path.join(script_dir, "eval_report.json")) as f:
             return json.load(f)
     except:
         return None
@@ -112,7 +114,7 @@ elif section == "Live Inference":
             nn.Dropout(0.3),
             nn.Linear(512, len(class_labels))
         )
-        model.load_state_dict(torch.load("model.pt", map_location="cpu", weights_only=True))
+        model.load_state_dict(torch.load(os.path.join(script_dir, "model.pt"), map_location="cpu", weights_only=True))
         model.eval()
         return model
 
@@ -130,10 +132,10 @@ elif section == "Live Inference":
     selected_image = None
 
     # Enhanced grid layout with image selection using button under each image
-    st.subheader("🔍 Select from Preloaded Images")
+    st.subheader("🔍 Select from Preloaded Images by click the button below. The prediction will appear at the end of this page.")
     preloaded_images = []
     preloaded_captions = []
-    img_dir = "dataset/validation"
+    img_dir = os.path.join(script_dir, "dataset/validation")
     for cls in class_labels:
         files = (glob(f"{img_dir}/{cls}/*.jpg") + glob(f"{img_dir}/{cls}/*.png"))
         for idx, file in enumerate(files):
@@ -213,7 +215,7 @@ elif section == "Live Inference":
                 "prediction": pred_label,
                 "probabilities": probs.tolist()
             }
-            with open("inference_log.jsonl", "a") as f:
+            with open(os.path.join(script_dir, "inference_log.jsonl"), "a") as f:
                 f.write(json.dumps(log_entry) + "\n")
     else:
         st.info("Please select or upload an image to begin inference.")
