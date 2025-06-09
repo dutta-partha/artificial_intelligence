@@ -12,10 +12,11 @@ import seaborn as sns
 from glob import glob
 
 
-
 # --- Constants and Configuration ---
 TEST_DATA_PATH = "./TEST"
 NUM_CLASSES = 8
+
+# --- Script directory ---
 script_dir = os.path.dirname(__file__)
 
 # Page config and title
@@ -247,7 +248,7 @@ if page == "ℹ️ About":
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
         # Placeholder for an image, replace with your actual logo
-        st.image(os.path.join(script_dir, "landing_page_logo.png"), width=300, caption="Plant Disease Classifier Logo")
+        st.image(os.path.join(script_dir, "landing_page_logo.png"), width=300)
 
 
 elif page == "📂 Data Summary":
