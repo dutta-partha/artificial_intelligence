@@ -14,8 +14,9 @@ from glob import glob
 
 
 # --- Constants and Configuration ---
-TEST_DATA_PATH = "./TEST" # Path to your test images (if used for listing classes, though report labels are better)
+TEST_DATA_PATH = "./TEST"
 NUM_CLASSES = 8
+script_dir = os.path.dirname(__file__)
 
 # Page config and title
 st.set_page_config(layout="wide")
@@ -91,7 +92,7 @@ class PlantDNet(nn.Module):
 @st.cache_data
 def load_eval_report(model_name):
     """Loads the evaluation report JSON for the specified model."""
-    file_path = f"plant_disease_eval_report_{model_name}.json"
+    file_path = os.path.join(script_dir, f"plant_disease_eval_report_{model_name}.json")
     if os.path.exists(file_path):
         with open(file_path) as f:
             report = json.load(f)
@@ -103,7 +104,7 @@ def load_eval_report(model_name):
 @st.cache_data
 def load_training_stats_data(model_name):
     """Loads the training statistics JSON for the specified model."""
-    file_path = f"plant_disease_training_stats_{model_name}.json"
+    file_path = os.path.join(script_dir, f"plant_disease_training_stats_{model_name}.json")
     if os.path.exists(file_path):
         return pd.read_json(file_path)
     else:
@@ -113,7 +114,7 @@ def load_training_stats_data(model_name):
 @st.cache_data
 def load_disease_details():
     """Loads general disease details (assuming this is a single file)."""
-    file_path = "disease_details.json" # Assuming this file exists and is universal
+    file_path = os.path.join(script_dir, "disease_details.json") # Assuming this file exists and is universal
     if os.path.exists(file_path):
         return pd.read_json(file_path)
     else:
@@ -140,7 +141,7 @@ def load_model_mobilenet():
             nn.Linear(in_features, NUM_CLASSES) # This maps to 'classifier.1.1' - it has weights/bias.
         )
     )
-    model_path = "plantd_model_MobileNetV2.pt"
+    model_path = os.path.join(script_dir, "plantd_model_MobileNetV2.pt")
     if os.path.exists(model_path):
         model.load_state_dict(torch.load(model_path, map_location="cuda" if torch.cuda.is_available() else "cpu"))
         model.eval()
@@ -153,7 +154,7 @@ def load_model_mobilenet():
 def load_model_plantdnet():
     """Loads the custom PlantDNet model."""
     model = PlantDNet(num_classes=NUM_CLASSES)
-    model_path = "plantd_model_PlantDNet.pt"
+    model_path = os.path.join(script_dir, "plantd_model_PlantDNet.pt")
     if os.path.exists(model_path):
         model.load_state_dict(torch.load(model_path, map_location="cuda" if torch.cuda.is_available() else "cpu"))
         model.eval()
@@ -246,7 +247,7 @@ if page == "ℹ️ About":
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
         # Placeholder for an image, replace with your actual logo
-        st.image("landing_page_logo.png", width=300, caption="Plant Disease Classifier Logo")
+        st.image(os.path.join(script_dir, "landing_page_logo.png"), width=300, caption="Plant Disease Classifier Logo")
 
 
 elif page == "📂 Data Summary":
@@ -361,7 +362,7 @@ elif page == "🧪 Inferencing":
     grid_cols = len(class_labels) # Number of columns based on number of classes
     grid_rows = 5 # Number of rows for the grid layout
 
-    img_dir = "TEST" # Directory where preloaded images are stored
+    img_dir = os.path.join(script_dir, "TEST") # Directory where preloaded images are stored
     for cls in class_labels:
         files = (glob(f"{img_dir}/{cls}/*.jpg") + glob(f"{img_dir}/{cls}/*.png"))
         for idx, file in enumerate(files[:grid_rows]):
