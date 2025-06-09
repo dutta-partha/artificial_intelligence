@@ -240,7 +240,7 @@ disease_details = load_disease_details()
 # --- Main App Logic ---
 
 if page == "ℹ️ About":
-    st.header("🌿 About Plant Disease Classifier")
+    st.header("🌿 About")
     st.markdown("This application classifies plant diseases from leaf images using deep learning. " \
     "It demonstrates and compares a custom Convolutional Neural Network (PlantDNet) and a Transfer Learning approach (MobileNetV2)." \
     " The models are trained to identify 8 distinct conditions, including various diseases and healthy leaves.")
@@ -332,7 +332,7 @@ elif page == "📈 Training Stats":
 
 
 elif page == "🧪 Inferencing":
-    st.header("🧪 Plant Disease Image Inferencing")
+    st.header("🧪 Inferencing")
 
     selected_model_for_inference = st.selectbox(
         "Select Model for Inferencing:",
