@@ -1,0 +1,157 @@
+{
+  "classification_report": {
+    "bacterial spot": {
+      "precision": 0.8985507246376812,
+      "recall": 0.9538461538461539,
+      "f1-score": 0.9253731343283582,
+      "support": 65.0
+    },
+    "early blight": {
+      "precision": 0.9454545454545454,
+      "recall": 0.8,
+      "f1-score": 0.8666666666666667,
+      "support": 65.0
+    },
+    "healthy": {
+      "precision": 0.9848484848484849,
+      "recall": 1.0,
+      "f1-score": 0.9923664122137404,
+      "support": 65.0
+    },
+    "late blight": {
+      "precision": 0.9384615384615385,
+      "recall": 0.9384615384615385,
+      "f1-score": 0.9384615384615385,
+      "support": 65.0
+    },
+    "leaf mold": {
+      "precision": 0.9264705882352942,
+      "recall": 0.9692307692307692,
+      "f1-score": 0.9473684210526315,
+      "support": 65.0
+    },
+    "mosaic virus": {
+      "precision": 0.9411764705882353,
+      "recall": 0.9846153846153847,
+      "f1-score": 0.9624060150375939,
+      "support": 65.0
+    },
+    "septoria spot": {
+      "precision": 0.9014084507042254,
+      "recall": 0.9846153846153847,
+      "f1-score": 0.9411764705882353,
+      "support": 65.0
+    },
+    "yellow leaf curl": {
+      "precision": 1.0,
+      "recall": 0.8923076923076924,
+      "f1-score": 0.943089430894309,
+      "support": 65.0
+    },
+    "accuracy": 0.9403846153846154,
+    "macro avg": {
+      "precision": 0.9420463503662506,
+      "recall": 0.9403846153846154,
+      "f1-score": 0.9396135111553842,
+      "support": 520.0
+    },
+    "weighted avg": {
+      "precision": 0.9420463503662507,
+      "recall": 0.9403846153846154,
+      "f1-score": 0.9396135111553842,
+      "support": 520.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      62,
+      0,
+      0,
+      0,
+      1,
+      0,
+      2,
+      0
+    ],
+    [
+      1,
+      52,
+      1,
+      2,
+      1,
+      3,
+      5,
+      0
+    ],
+    [
+      0,
+      0,
+      65,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      3,
+      0,
+      61,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      63,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      64,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      64,
+      0
+    ],
+    [
+      6,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      58
+    ]
+  ],
+  "labels": [
+    "bacterial spot",
+    "early blight",
+    "healthy",
+    "late blight",
+    "leaf mold",
+    "mosaic virus",
+    "septoria spot",
+    "yellow leaf curl"
+  ]
+}
